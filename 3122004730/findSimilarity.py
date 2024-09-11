@@ -23,6 +23,8 @@ def find_similarity(file1, file2):
     similarity = np.around(matcher.ratio(), 2)
 
     return similarity
+
+#清空output文件内容
 def clear_output_txt(output_file):
     with open(output_file, 'w', encoding='utf-8') as f:
         f.truncate(0)

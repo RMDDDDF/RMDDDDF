@@ -34,7 +34,7 @@ def clear_output_txt(output_file):
 def main():
     if len(sys.argv) != 4:
         print("Usage: python plagiarism_checker.py <original_file> <plagiarized_file> <output_file>")
-        return
+        sys.exit(1)
 
     original_file = sys.argv[1]
     plagiarized_file = sys.argv[2]
@@ -51,6 +51,7 @@ def main():
         else:
             #存在空文本
             print(f"Similarity: Empty file exists.")
+            clear_output_txt(output_file)
     except FileNotFoundError:
         # 文件不存在
         print(f"ERROR:Can't find the file.Please check the file name.")
@@ -67,7 +68,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-file1 = r"testData/orig.txt"
-file2 = r"testData/orig_0.8_del.txt"
-similarity = find_similarity(file1, file2)
-print(f"The similarity between {file1} and {file2} is {similarity}\n")
+# file1 = r"testData/orig.txt"
+# file2 = r"testData/orig_0.8_del.txt"
+# similarity = find_similarity(file1, file2)
+# print(f"The similarity between {file1} and {file2} is {similarity}\n")

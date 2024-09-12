@@ -2,6 +2,7 @@ import sys
 import difflib
 import numpy as np
 import os
+import re
 
 
 def find_similarity(file1, file2):
@@ -18,8 +19,9 @@ def find_similarity(file1, file2):
         if os.path.getsize(file2) == 0:
             return -1
 
+
     # 使用difflib比较两个文本
-    matcher = difflib.SequenceMatcher(None, text1.split(), text2.split())
+    matcher = difflib.SequenceMatcher(None, text1, text2)
     similarity = np.around(matcher.ratio(), 2)
 
     return similarity
@@ -45,7 +47,7 @@ def main():
             print(f"Similarity: {similarity}")
             # 将结果写入输出文件
             with open(output_file, 'w', encoding='utf-8') as f:
-                f.write(f"{similarity:.2f}\n")
+                f.write(f"The similarity between {original_file} and {plagiarized_file} is {similarity:.2f}\n")
         else:
             #存在空文本
             print(f"Similarity: Empty file exists.")
@@ -65,4 +67,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+file1 = r"testData/orig.txt"
+file2 = r"testData/orig_0.8_del.txt"
+similarity = find_similarity(file1, file2)
+print(f"The similarity between {file1} and {file2} is {similarity}\n")
